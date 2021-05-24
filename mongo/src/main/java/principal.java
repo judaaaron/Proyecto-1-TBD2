@@ -123,6 +123,9 @@ public class principal extends javax.swing.JFrame {
             // cb_examenAlumno.addItem(clasess.get(i).getNombreClase());
             System.out.println(clasess.get(i).getNombreClase());
         }
+        for (int i = 0; i < notes.size(); i++) {
+            System.out.println(notes.get(i).getIdAlumno() + " este es de notas");
+        }
     }
 
     /**
@@ -576,6 +579,11 @@ public class principal extends javax.swing.JFrame {
                 btn_finalizarMouseClicked(evt);
             }
         });
+        btn_finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_finalizarActionPerformed(evt);
+            }
+        });
         Exameness.getContentPane().add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(699, 443, 150, 40));
 
         buttonGroup2.add(v);
@@ -701,11 +709,11 @@ public class principal extends javax.swing.JFrame {
                 btnregresar_mostrarMouseClicked(evt);
             }
         });
-        datosAdmin.getContentPane().add(btnregresar_mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 130, 40));
+        datosAdmin.getContentPane().add(btnregresar_mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 130, 40));
 
         jLabel41.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         jLabel41.setText("Preguntas asociadas a la clase");
-        datosAdmin.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 150, 20));
+        datosAdmin.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 150, 20));
 
         cb_mostrarClases.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         cb_mostrarClases.addItemListener(new java.awt.event.ItemListener() {
@@ -713,33 +721,37 @@ public class principal extends javax.swing.JFrame {
                 cb_mostrarClasesItemStateChanged(evt);
             }
         });
-        datosAdmin.getContentPane().add(cb_mostrarClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 150, 30));
+        datosAdmin.getContentPane().add(cb_mostrarClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 150, 30));
 
         jLabel42.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         jLabel42.setText("Exámen asociado a la clase");
-        datosAdmin.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 150, 20));
+        datosAdmin.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 150, 20));
 
         jLabel43.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         jLabel43.setText("Seleccione una clase");
-        datosAdmin.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 150, 20));
+        datosAdmin.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 20));
 
         area7.setEditable(false);
         area7.setColumns(20);
+        area7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         area7.setRows(5);
         jScrollPane7.setViewportView(area7);
 
-        datosAdmin.getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 420, 360));
+        datosAdmin.getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 420, 360));
 
         jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         area8.setEditable(false);
         area8.setColumns(20);
+        area8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         area8.setRows(5);
         jScrollPane6.setViewportView(area8);
 
-        datosAdmin.getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 420, 50));
-        datosAdmin.getContentPane().add(fondo_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 530));
+        datosAdmin.getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 420, 50));
+
+        fondo_ver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo12.jpg"))); // NOI18N
+        datosAdmin.getContentPane().add(fondo_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 510));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -1168,10 +1180,20 @@ public class principal extends javax.swing.JFrame {
             }
         }
         puntosPosibles = controlExamen * 5;
-        Exameness.dispose();
+
         Nota ntt = new Nota(alumnoos.get(flag).getIdAlumno(), examenes.get(cb_examenAlumno.getSelectedIndex()).getIdExamen(), puntaje, puntosPosibles);
         notas.insertOne(ntt);
+        notes.add(ntt);
+        cp = 0;
+
         JOptionPane.showMessageDialog(null, "Tu puntaje obtenido es: " + puntaje);
+        Exameness.dispose();
+        Estudiantes.pack();
+        Estudiantes.setModal(true);
+        Estudiantes.setLocationRelativeTo(null);
+        Estudiantes.setVisible(true);
+
+
     }//GEN-LAST:event_btn_finalizarMouseClicked
 
     private void btn_comenzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_comenzarMouseClicked
@@ -1181,6 +1203,16 @@ public class principal extends javax.swing.JFrame {
 //                break;
 //            }
 //        }
+        cp = 0;
+        puntaje = 0;
+        ventana_examen.setText("");
+        buttonGroup2.clearSelection();
+        btn_avanzar.setEnabled(true);
+        btn_finalizar.setEnabled(false);
+        for (int i = 0; i < questions.size(); i++) {
+            preguntasExamen.remove(questions.get(i).getDescripcion());
+            respuestasExamen.remove(questions.get(i).isTipo());
+        }
         boolean validar = false;
         int idExa, idAl = alumnoos.get(flag).getIdAlumno();
         int idxx = examenes.get(cb_examenAlumno.getSelectedIndex()).getIdExamen();
@@ -1301,6 +1333,8 @@ public class principal extends javax.swing.JFrame {
                 acum2 += notes.get(i).getNota() + "\n";
                 acum3 += notes.get(i).getPuntosPosibles() + "\n";
 
+                vacio = false;
+
             } else {
                 vacio = true;
             }
@@ -1355,7 +1389,7 @@ public class principal extends javax.swing.JFrame {
         String aPreg = "", aExa = "";
         for (int i = 0; i < questions.size(); i++) {
             if (clasess.get(cb_mostrarClases.getSelectedIndex()).getIdClase() == questions.get(i).getIdClase()) {
-                aPreg += "•" + " Id Pregunta: " + " " + questions.get(i).getIdQ() + " Titulo: " + questions.get(i).getTitulo() + "\n";
+                aPreg += "•" + " Id Pregunta: " + " " + questions.get(i).getIdQ() + " /Titulo: " + questions.get(i).getTitulo() + "\n";
                 aPreg += "\n";
             }
         }
@@ -1364,13 +1398,17 @@ public class principal extends javax.swing.JFrame {
         //  Jlist_Preguntas.setModel(model);
         for (int i = 0; i < examenes.size(); i++) {
             if (clasess.get(cb_mostrarClases.getSelectedIndex()).getIdClase() == examenes.get(i).getIdClase()) {
-                aExa += "•" + " Id Examen: " + " " + examenes.get(i).getIdExamen() + " N° Preguntas: " + examenes.get(i).getCantPreguntas() + "\n";
+                aExa += "•" + " Id Examen: " + " " + examenes.get(i).getIdExamen() + " /N° Preguntas: " + examenes.get(i).getCantPreguntas() + "\n";
                 aExa += "\n";
             }
         }
         area8.setText(aExa);
 
     }//GEN-LAST:event_cb_mostrarClasesItemStateChanged
+
+    private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_finalizarActionPerformed
 
     public static String doHashing(String password) {
         try {
