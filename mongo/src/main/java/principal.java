@@ -40,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Judá Aarón
  */
 public class principal extends javax.swing.JFrame {
-
+    
     MongoDatabase db;
     MongoCollection<Alumno> students;
     MongoCollection<clasesita> Clase;
@@ -48,17 +48,17 @@ public class principal extends javax.swing.JFrame {
     MongoCollection<Examen> Exams;
     MongoCollection<Nota> notas;
     Query k;
-
+    
     ArrayList<String> coleccion = new ArrayList();
     ArrayList<Alumno> alumnoos = new ArrayList();
     ArrayList<clasesita> clasess = new ArrayList();
     ArrayList<Preguntas> questions = new ArrayList();
     ArrayList<Examen> examenes = new ArrayList();
     ArrayList<Nota> notes = new ArrayList();
-
+    
     ArrayList<String> preguntasExamen = new ArrayList();
     ArrayList<Object> respuestasExamen = new ArrayList();
-
+    
     ConnectionString connString = new ConnectionString("mongodb://localhost:27017");
     CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
     CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
@@ -68,13 +68,13 @@ public class principal extends javax.swing.JFrame {
             .retryWrites(true)
             .build();
     MongoClient mongoClient = MongoClients.create(settings);
-
+    
     clasesita cla = new clasesita();
     Alumno al = new Alumno();
     Examen ex = new Examen();
     Preguntas pr = new Preguntas();
     Nota nt = new Nota();
-
+    
     int flag = 0;
     int CantidadPreguntas = 0, controlExamen = 0, cp = 0, puntaje = 0, aux, cero = 0, puntosPosibles;
     Object verdadero = true, falso = false;
@@ -90,7 +90,7 @@ public class principal extends javax.swing.JFrame {
         students = db.getCollection("Alumno", Alumno.class);
         Exams = db.getCollection("Examenes", Examen.class);
         notas = db.getCollection("Notas", Nota.class);
-
+        
         List<Alumno> ListAlumno = students.find().into(new ArrayList<>());
         List<clasesita> ListClase = Clase.find().into(new ArrayList<>());
         List<Preguntas> ListPreguntas = Questions.find().into(new ArrayList<>());
@@ -102,9 +102,9 @@ public class principal extends javax.swing.JFrame {
         questions = (ArrayList<Preguntas>) ListPreguntas;
         examenes = (ArrayList<Examen>) ListExamenes;
         notes = (ArrayList<Nota>) ListNotas;
-        for (int i = 0; i < alumnoos.size(); i++) {
-            System.out.println(alumnoos.get(i).getNombreAlumno());
-        }
+//        for (int i = 0; i < alumnoos.size(); i++) {
+//            System.out.println(alumnoos.get(i).getNombreAlumno());
+//        }
 //        for (int i = 0; i < clasess.size(); i++) {
 //            
 //        }
@@ -121,11 +121,11 @@ public class principal extends javax.swing.JFrame {
             cb_examen.addItem(clasess.get(i).getNombreClase());
             cb_mostrarClases.addItem(clasess.get(i).getNombreClase());
             // cb_examenAlumno.addItem(clasess.get(i).getNombreClase());
-            System.out.println(clasess.get(i).getNombreClase());
+            // System.out.println(clasess.get(i).getNombreClase());
         }
-        for (int i = 0; i < notes.size(); i++) {
-            System.out.println(notes.get(i).getIdAlumno() + " este es de notas");
-        }
+//        for (int i = 0; i < notes.size(); i++) {
+//            System.out.println(notes.get(i).getIdAlumno() + " este es de notas");
+//        }
     }
 
     /**
@@ -398,13 +398,17 @@ public class principal extends javax.swing.JFrame {
         });
         Admin.getContentPane().add(btn_cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 130, 50));
 
+        btn_mostrardatosAdmiin.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        btn_mostrardatosAdmiin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/documents.png"))); // NOI18N
         btn_mostrardatosAdmiin.setText("Mostrar datos");
+        btn_mostrardatosAdmiin.setContentAreaFilled(false);
+        btn_mostrardatosAdmiin.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/documents (1).png"))); // NOI18N
         btn_mostrardatosAdmiin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_mostrardatosAdmiinMouseClicked(evt);
             }
         });
-        Admin.getContentPane().add(btn_mostrardatosAdmiin, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, -1, -1));
+        Admin.getContentPane().add(btn_mostrardatosAdmiin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 423, -1, 40));
 
         jLabel5.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         jLabel5.setText("ADMINISTRADOR");
@@ -845,7 +849,7 @@ public class principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-
+        
         if (j_idPregunta.getText().equals("") || j_titulo.getText().equals("") || j_descripcion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Debes de llenar todos los campos");
         } else {
@@ -855,7 +859,7 @@ public class principal extends javax.swing.JFrame {
             String Descripcion = j_descripcion.getText();
             int idClase = cb_clases.getSelectedIndex();
             boolean tipo = false, validar = false;
-
+            
             for (int i = 0; i < questions.size(); i++) {
                 if (questions.get(i).getIdQ() == idQuestion) {
                     validar = true;
@@ -881,7 +885,7 @@ public class principal extends javax.swing.JFrame {
                     j_descripcion.setText("");
                     buttonGroup1.clearSelection();
                 }
-
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Id pregunta ya existe, intente mas tarde");
                 j_idPregunta.setText("");
@@ -890,7 +894,7 @@ public class principal extends javax.swing.JFrame {
                 buttonGroup1.clearSelection();
             }
         }
-
+        
 
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -919,13 +923,13 @@ public class principal extends javax.swing.JFrame {
     private void btn_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registrarMouseClicked
         if (j_idAlumno.getText().equals("") || j_nombreA.getText().equals("") || j_login.getText().equals("") || j_pass.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Para registrarte debes de llenar todos los campos");
-
+            
         } else {
             int idAlumno = Integer.parseInt(j_idAlumno.getText());
             String Nombre = j_nombreA.getText();
             String logiin = j_login.getText();
             String sha = j_pass.getText();
-            System.out.println(doHashing(sha));
+            // System.out.println(doHashing(sha));
             Alumno alu = new Alumno(idAlumno, Nombre, logiin, doHashing(sha));
             alumnoos.add(alu);
             students.insertOne(alu);
@@ -936,7 +940,7 @@ public class principal extends javax.swing.JFrame {
             j_pass.setText("");
             registrar.dispose();
         }
-
+        
 
     }//GEN-LAST:event_btn_registrarMouseClicked
 
@@ -946,16 +950,16 @@ public class principal extends javax.swing.JFrame {
         String pp = doHashing(passw);
         //System.out.println(pp);
         boolean normal = false;
-
+        
         if (userLogin.getText().equals("") || passLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "No puedes dejar campos vacíos");
         } else {
-            if (alumnoos.get(0).getUsername().equals(loginn) && alumnoos.get(0).getPassword().equals(passw)) {
+            if (alumnoos.get(0).getUsername().equals(loginn) && alumnoos.get(0).getPassword().equals(doHashing(passw))) {
                 Admin.pack();
                 Admin.setModal(true);
                 Admin.setLocationRelativeTo(null);
                 Admin.setVisible(true);
-
+                
                 userLogin.setText("");
                 passLogin.setText("");
             } else {
@@ -979,10 +983,10 @@ public class principal extends javax.swing.JFrame {
                     Estudiantes.setModal(true);
                     Estudiantes.setLocationRelativeTo(null);
                     Estudiantes.setVisible(true);
-
+                    
                     userLogin.setText("");
                     passLogin.setText("");
-
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Datos incorrectos");
                     userLogin.setText("");
@@ -990,7 +994,7 @@ public class principal extends javax.swing.JFrame {
                 }
             }
         }
-
+        
 
     }//GEN-LAST:event_btn_ingresarMouseClicked
 
@@ -1015,15 +1019,25 @@ public class principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Id clase ya existe, intente de nuevo");
                 j_idClase.setText("");
             } else {
+                for (int i = 0; i < clasess.size(); i++) {
+                    cb_clases.removeItem(clasess.get(i).getNombreClase());
+                    cb_examen.removeItem(clasess.get(i).getNombreClase());
+                    cb_mostrarClases.removeItem(clasess.get(i).getNombreClase());
+                }
                 clasesita cl = new clasesita(idClasee, NameClase);
                 Clase.insertOne(cl);
                 clasess.add(cl);
+                for (int i = 0; i < clasess.size(); i++) {
+                    cb_clases.addItem(clasess.get(i).getNombreClase());
+                    cb_examen.addItem(clasess.get(i).getNombreClase());
+                    cb_mostrarClases.addItem(clasess.get(i).getNombreClase());
+                }
                 JOptionPane.showMessageDialog(null, "Clase creada con exito");
                 j_idClase.setText("");
                 j_nombreClase.setText("");
             }
         }
-
+        
 
     }//GEN-LAST:event_btn_guardarClaseMouseClicked
 
@@ -1052,26 +1066,26 @@ public class principal extends javax.swing.JFrame {
                         break;
                     }
                 }
-
+                
                 if (ValidarID == false) {
                     Examen exs = new Examen(idExamen, clasess.get(idClasee).getIdClase(), cantPreg);
                     Exams.insertOne(exs);
                     JOptionPane.showMessageDialog(null, "Examen creado con éxito");
                     j_idExamen.setText("");
                     j_cantP.setText("");
-
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Ya existe un examen con ese idClase o ya idExamen ya existe");
                     j_idExamen.setText("");
                     j_cantP.setText("");
                 }
-
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Cantidad de preguntas es mayor a cantidad de preguntas de la clase.");
                 j_cantP.setText("");
             }
         }
-
+        
 
     }//GEN-LAST:event_btn_crearExamenMouseClicked
 
@@ -1084,20 +1098,20 @@ public class principal extends javax.swing.JFrame {
             // cb_examenAlumno.addItem(clasess.get(i).getNombreClase());
             cb_examenAlumno.removeItem(clasess.get(i).getNombreClase());
         }
-
+        
         Estudiantes.dispose();
     }//GEN-LAST:event_btn_singoutAMouseClicked
 
     private void btn_avanzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_avanzarMouseClicked
-
+        
         verdadero = true;
         falso = false;
-        System.out.println(cp);
+        // System.out.println(cp);
 
         if (cp < controlExamen) {
-
+            
             cp++;
-
+            
             ventana_examen.setText(preguntasExamen.get(cp));
             acumP = "Pregunta: " + (cp + 1) + " de " + controlExamen;
             info.setText(acumP);
@@ -1109,7 +1123,7 @@ public class principal extends javax.swing.JFrame {
                     puntaje += 0;
                 }
             }
-
+            
             if (f.isSelected()) {
                 falso = false;
                 if (falso.equals(respuestasExamen.get(cp - 1))) {
@@ -1121,13 +1135,13 @@ public class principal extends javax.swing.JFrame {
             //cp--;
             buttonGroup2.clearSelection();
             if (cp == controlExamen - 1) {
-
+                
                 btn_avanzar.setEnabled(false);
-
+                
                 btn_finalizar.setEnabled(true);
             }
         }
-
+        
 
     }//GEN-LAST:event_btn_avanzarMouseClicked
 
@@ -1159,7 +1173,7 @@ public class principal extends javax.swing.JFrame {
 //            }
 //
 //        }
-        System.out.print("");
+        //System.out.print("");
         if (cp == controlExamen - 1) {
             if (v.isSelected()) {
                 verdadero = true;
@@ -1169,7 +1183,7 @@ public class principal extends javax.swing.JFrame {
                     puntaje += 0;
                 }
             }
-
+            
             if (f.isSelected()) {
                 falso = false;
                 if (falso.equals(respuestasExamen.get(controlExamen - 1))) {
@@ -1180,19 +1194,19 @@ public class principal extends javax.swing.JFrame {
             }
         }
         puntosPosibles = controlExamen * 5;
-
+        
         Nota ntt = new Nota(alumnoos.get(flag).getIdAlumno(), examenes.get(cb_examenAlumno.getSelectedIndex()).getIdExamen(), puntaje, puntosPosibles);
         notas.insertOne(ntt);
         notes.add(ntt);
         cp = 0;
-
+        
         JOptionPane.showMessageDialog(null, "Tu puntaje obtenido es: " + puntaje);
         Exameness.dispose();
         Estudiantes.pack();
         Estudiantes.setModal(true);
         Estudiantes.setLocationRelativeTo(null);
         Estudiantes.setVisible(true);
-
+        
 
     }//GEN-LAST:event_btn_finalizarMouseClicked
 
@@ -1216,8 +1230,8 @@ public class principal extends javax.swing.JFrame {
         boolean validar = false;
         int idExa, idAl = alumnoos.get(flag).getIdAlumno();
         int idxx = examenes.get(cb_examenAlumno.getSelectedIndex()).getIdExamen();
-        System.out.println(idxx + " idxx");
-        System.out.println(alumnoos.get(flag).getIdAlumno() + "control id alumno");
+//        System.out.println(idxx + " idxx");
+//        System.out.println(alumnoos.get(flag).getIdAlumno() + "control id alumno");
         for (int i = 0; i < notes.size(); i++) {
             if ((notes.get(i).getIdExamen() == idxx) && (notes.get(i).getIdAlumno() == idAl)) {
                 //JOptionPane.showMessageDialog(null, "Este alumno ya hizo algun examen");
@@ -1239,17 +1253,17 @@ public class principal extends javax.swing.JFrame {
             int cont = 0;
             Estudiantes.setVisible(false);
             jLabel27.setText("Examen de " + clasess.get(cb_examenAlumno.getSelectedIndex()).getNombreClase());
-
+            
             int puntos = 0;
             for (int i = 0; i < clasess.size(); i++) {
-                System.out.println(i + " indice " + clasess.get(i).getIdClase());
+                //  System.out.println(i + " indice " + clasess.get(i).getIdClase());
             }
             System.out.println(examenes.get(cb_examenAlumno.getSelectedIndex()).idClase + "getselected");
             for (int i = 0; i < examenes.size(); i++) {
-                System.out.println(examenes.get(i).getCantPreguntas() + "este es el cant preguntas");
+                // System.out.println(examenes.get(i).getCantPreguntas() + "este es el cant preguntas");
             }
             for (int i = 0; i < examenes.size(); i++) {
-                System.out.println(i + "" + examenes.get(i).getIdClase());
+                // System.out.println(i + "" + examenes.get(i).getIdClase());
             }
 //        for (int i = 0; i < examenes.size(); i++) {
 //            if (examenes.get(i).getIdClase() == examenes.get(cb_examenAlumno.getSelectedIndex()).getIdClase()) {
@@ -1261,23 +1275,23 @@ public class principal extends javax.swing.JFrame {
             Bson filter = eq("idClase", clasess.get(cb_examenAlumno.getSelectedIndex()).getIdClase());
             try {
                 controlExamen = Exams.find(filter).first().getCantPreguntas();
-                System.out.println(controlExamen + " este es control examen");
+                //  System.out.println(controlExamen + " este es control examen");
             } catch (Exception e) {
             }
-
+            
             for (int i = 0; i < questions.size(); i++) {
                 if (questions.get(i).getIdClase() == clasess.get(cb_examenAlumno.getSelectedIndex()).getIdClase()) {
                     //  System.out.println(questions.get(i).getDescripcion());
                     preguntasExamen.add(questions.get(i).getDescripcion());
                     respuestasExamen.add(questions.get(i).isTipo());
-
+                    
                 }
-
+                
             }
             // System.out.println(controlExamen + "este es el control examen");
 
             ventana_examen.setText(preguntasExamen.get(cp));
-            System.out.println(respuestasExamen.get(cp) + "que es");
+            //System.out.println(respuestasExamen.get(cp) + "que es");
             acumP += "Pregunta: " + (cp + 1) + " de " + controlExamen;
             info.setText(acumP);
 
@@ -1301,25 +1315,25 @@ public class principal extends javax.swing.JFrame {
 //        }
             //System.out.println(buttonGroup2.getSelection()+"que es");
             aux = cp;
-            System.out.println(respuestasExamen.get(0) + " este es antes " + cp);
+            // System.out.println(respuestasExamen.get(0) + " este es antes " + cp);
 
             for (int j = 0; j < preguntasExamen.size(); j++) {
-                System.out.println(preguntasExamen.get(j));
+                // System.out.println(preguntasExamen.get(j));
             }
             for (int i = 0; i < questions.size(); i++) {
                 if (questions.get(i).getIdClase() == clasess.get(cb_examenAlumno.getSelectedIndex()).getIdClase()) {
-                    System.out.println(i + "indice" + questions.get(i).isTipo() + " este del arraylist");
+                    // System.out.println(i + "indice" + questions.get(i).isTipo() + " este del arraylist");
                 }
             }
-
+            
             for (int i = 0; i < respuestasExamen.size(); i++) {
-                System.out.println(i + " indice " + respuestasExamen.get(i) + " este de respuestas");
+                // System.out.println(i + " indice " + respuestasExamen.get(i) + " este de respuestas");
             }
             Exameness.pack();
             Exameness.setModal(true);
             Exameness.setLocationRelativeTo(null);
             Exameness.setVisible(true);
-
+            
         }
 
     }//GEN-LAST:event_btn_comenzarMouseClicked
@@ -1332,9 +1346,9 @@ public class principal extends javax.swing.JFrame {
                 acum += notes.get(i).getIdExamen() + "\n";
                 acum2 += notes.get(i).getNota() + "\n";
                 acum3 += notes.get(i).getPuntosPosibles() + "\n";
-
+                
                 vacio = false;
-
+                
             } else {
                 vacio = true;
             }
@@ -1345,7 +1359,7 @@ public class principal extends javax.swing.JFrame {
             area4.setText(acum);
             area3.setText(acum2);
             area5.setText(acum3);
-
+            
             Estudiantes.setVisible(false);
             VerNotas.pack();
             VerNotas.setModal(true);
@@ -1409,27 +1423,27 @@ public class principal extends javax.swing.JFrame {
     private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_finalizarActionPerformed
-
+    
     public static String doHashing(String password) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("md5");
-
+            
             messageDigest.update(password.getBytes());
-
+            
             byte[] resultByteArray = messageDigest.digest();
-
+            
             StringBuilder sb = new StringBuilder();
-
+            
             for (byte b : resultByteArray) {
                 sb.append(String.format("%02x", b));
             }
-
+            
             return sb.toString();
-
+            
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
+        
         return "";
     }
 
