@@ -76,7 +76,7 @@ public class principal extends javax.swing.JFrame {
     Nota nt = new Nota();
 
     int flag = 0;
-    int CantidadPreguntas = 0, controlExamen = 0, cp = 0, puntaje = 0, aux, cero = 0;
+    int CantidadPreguntas = 0, controlExamen = 0, cp = 0, puntaje = 0, aux, cero = 0, puntosPosibles;
     Object verdadero = true, falso = false;
     String acumP = "";
 
@@ -210,13 +210,17 @@ public class principal extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup1 = new javax.swing.ButtonGroup();
         VerNotas = new javax.swing.JDialog();
+        jSeparator5 = new javax.swing.JSeparator();
         jLabel28 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         btn_regresar_ver = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         area3 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         area4 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        area5 = new javax.swing.JTextArea();
         jl = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
@@ -442,7 +446,7 @@ public class principal extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         jLabel24.setText("jLabel24");
-        Estudiantes.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 160, 20));
+        Estudiantes.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 160, 20));
 
         jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo 3.gif"))); // NOI18N
         Estudiantes.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 600));
@@ -601,13 +605,18 @@ public class principal extends javax.swing.JFrame {
 
         VerNotas.setUndecorated(true);
         VerNotas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        VerNotas.getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 290, -1));
 
         jLabel28.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         jLabel28.setText("ID Examen");
-        VerNotas.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        VerNotas.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jLabel37.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jLabel37.setText("Puntos posibles");
+        VerNotas.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
         jLabel29.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
-        jLabel29.setText("Nota examen");
+        jLabel29.setText("Nota calculada");
         VerNotas.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
 
         btn_regresar_ver.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
@@ -620,7 +629,7 @@ public class principal extends javax.swing.JFrame {
                 btn_regresar_verMouseClicked(evt);
             }
         });
-        VerNotas.getContentPane().add(btn_regresar_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, -1, -1));
+        VerNotas.getContentPane().add(btn_regresar_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, -1, -1));
 
         jScrollPane2.setBorder(null);
         jScrollPane2.setHorizontalScrollBar(null);
@@ -631,7 +640,7 @@ public class principal extends javax.swing.JFrame {
         area3.setBorder(null);
         jScrollPane2.setViewportView(area3);
 
-        VerNotas.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 90, 410));
+        VerNotas.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 90, 410));
 
         jScrollPane4.setBorder(null);
         jScrollPane4.setHorizontalScrollBar(null);
@@ -644,8 +653,19 @@ public class principal extends javax.swing.JFrame {
 
         VerNotas.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 90, 410));
 
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBar(null);
+
+        area5.setEditable(false);
+        area5.setColumns(20);
+        area5.setRows(5);
+        area5.setBorder(null);
+        jScrollPane3.setViewportView(area5);
+
+        VerNotas.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 90, 410));
+
         jl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fond10.gif"))); // NOI18N
-        VerNotas.getContentPane().add(jl, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 0, 510, 480));
+        VerNotas.getContentPane().add(jl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 490));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -911,6 +931,7 @@ public class principal extends javax.swing.JFrame {
             } else {
                 clasesita cl = new clasesita(idClasee, NameClase);
                 Clase.insertOne(cl);
+                clasess.add(cl);
                 JOptionPane.showMessageDialog(null, "Clase creada con exito");
                 j_idClase.setText("");
                 j_nombreClase.setText("");
@@ -973,6 +994,11 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_userLoginActionPerformed
 
     private void btn_singoutAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_singoutAMouseClicked
+        for (int i = 0; i < clasess.size(); i++) {
+            // cb_examenAlumno.addItem(clasess.get(i).getNombreClase());
+            cb_examenAlumno.removeItem(clasess.get(i).getNombreClase());
+        }
+
         Estudiantes.dispose();
     }//GEN-LAST:event_btn_singoutAMouseClicked
 
@@ -1067,9 +1093,9 @@ public class principal extends javax.swing.JFrame {
                 }
             }
         }
-
+        puntosPosibles = controlExamen * 5;
         Exameness.dispose();
-        Nota ntt = new Nota(alumnoos.get(flag).getIdAlumno(), examenes.get(cb_examenAlumno.getSelectedIndex()).getIdExamen(), puntaje);
+        Nota ntt = new Nota(alumnoos.get(flag).getIdAlumno(), examenes.get(cb_examenAlumno.getSelectedIndex()).getIdExamen(), puntaje, puntosPosibles);
         notas.insertOne(ntt);
         JOptionPane.showMessageDialog(null, "Tu puntaje obtenido es: " + puntaje);
     }//GEN-LAST:event_btn_finalizarMouseClicked
@@ -1193,28 +1219,39 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_comenzarMouseClicked
 
     private void btn_verExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_verExamenesMouseClicked
-        String acum = "", acum2 = "";
+        String acum = "", acum2 = "", acum3 = "";
+        boolean vacio = false;
         for (int i = 0; i < notes.size(); i++) {
             if (notes.get(i).getIdAlumno() == alumnoos.get(flag).getIdAlumno()) {
-                acum += notes.get(i).getIdExamen() + "   ➜   " + "\n";
+                acum += notes.get(i).getIdExamen() + "\n";
                 acum2 += notes.get(i).getNota() + "\n";
+                acum3 += notes.get(i).getPuntosPosibles() + "\n";
 
+            } else {
+                vacio = true;
             }
         }
-        area4.setText(acum);
-        area3.setText(acum2);
+        if (vacio == true) {
+            JOptionPane.showMessageDialog(null, "No tienes ninguna calificacion hasta el momento");
+        } else {
+            area4.setText(acum);
+            area3.setText(acum2);
+            area5.setText(acum3);
 
-        Estudiantes.setVisible(false);
-        VerNotas.pack();
-        VerNotas.setModal(true);
-        VerNotas.setLocationRelativeTo(null);
-        VerNotas.setVisible(true);
+            Estudiantes.setVisible(false);
+            VerNotas.pack();
+            VerNotas.setModal(true);
+            VerNotas.setLocationRelativeTo(null);
+            VerNotas.setVisible(true);
+        }
+
     }//GEN-LAST:event_btn_verExamenesMouseClicked
 
     private void btn_regresar_verMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_regresar_verMouseClicked
         VerNotas.dispose();
         area3.setText("");
         area4.setText("");
+        area5.setText("");
         Estudiantes.pack();
         Estudiantes.setModal(true);
         Estudiantes.setLocationRelativeTo(null);
@@ -1287,6 +1324,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JDialog VerNotas;
     private javax.swing.JTextArea area3;
     private javax.swing.JTextArea area4;
+    private javax.swing.JTextArea area5;
     private javax.swing.JButton btn_avanzar;
     private javax.swing.JButton btn_cerrarSesion;
     private javax.swing.JButton btn_comenzar;
@@ -1342,6 +1380,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -1356,11 +1395,13 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTextField j_cantP;
     private javax.swing.JTextField j_descripcion;
     private javax.swing.JTextField j_idAlumno;

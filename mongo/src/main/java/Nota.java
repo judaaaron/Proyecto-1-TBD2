@@ -10,15 +10,24 @@ public class Nota {
 
     @BsonProperty(value = "_id")
     ObjectId id;
-    int idAlumno, idExamen, nota;
+    int idAlumno, idExamen, nota, puntosPosibles;
 
     public Nota() {
     }
 
-    public Nota(int idAlumno, int idExamen, int nota) {
+    public Nota(int idAlumno, int idExamen, int nota, int puntosPosibles) {
         this.idAlumno = idAlumno;
         this.idExamen = idExamen;
         this.nota = nota;
+        this.puntosPosibles = puntosPosibles;
+    }
+
+    public int getPuntosPosibles() {
+        return puntosPosibles;
+    }
+
+    public void setPuntosPosibles(int puntosPosibles) {
+        this.puntosPosibles = puntosPosibles;
     }
 
     public ObjectId getId() {
@@ -55,9 +64,7 @@ public class Nota {
 
     @Override
     public String toString() {
-        return "Nota{" + "id=" + id + ", idAlumno=" + idAlumno + ", idExamen=" + idExamen + ", nota=" + nota + '}';
+        return "Nota{" + "id=" + id + ", idAlumno=" + idAlumno + ", idExamen=" + idExamen + ", nota=" + nota + ", puntosPosibles=" + puntosPosibles + '}';
     }
-    
-    
 
 }
